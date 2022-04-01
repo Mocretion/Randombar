@@ -30,6 +30,10 @@ public class RandomCommand implements Command<FabricClientCommandSource> {
 
         bar.rndStart = context.getArgument("StartSlot", Integer.class);
         bar.rndEnd = context.getArgument("EndSlot", Integer.class);
+        if(bar.rndStart > 0)
+            context.getSource().sendFeedback(new LiteralText("Randombar enabled."));
+        else
+            context.getSource().sendFeedback(new LiteralText("Randombar disabled."));
         return 1;
     }
 }
