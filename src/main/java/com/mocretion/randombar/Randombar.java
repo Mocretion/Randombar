@@ -1,30 +1,11 @@
 package com.mocretion.randombar;
 
 import com.mocretion.randombar.command.RandomCommand;
-import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.fabricmc.fabric.mixin.client.keybinding.KeyCodeAccessor;
-import net.minecraft.client.Keyboard;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.MinecraftClientGame;
-import net.minecraft.client.WindowSettings;
-import net.minecraft.client.gui.screen.option.OptionsScreen;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.command.argument.ArgumentTypes;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.TypedActionResult;
-import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
