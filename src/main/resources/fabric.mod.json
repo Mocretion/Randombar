@@ -4,17 +4,17 @@
   "version": "${version}",
 
   "name": "Randombar",
-  "description": "Select a random hotbar-slot after placing down a block",
+  "description": "Select a random hotbar-slot after placing a block",
   "authors": [
     "Mocretion"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Mocretion/Randombar",
+    "sources": "https://github.com/Mocretion/Randombar"
   },
 
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/randombar/icon.png",
 
   "environment": "*",
   "entrypoints": {
