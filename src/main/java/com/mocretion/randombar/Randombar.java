@@ -31,15 +31,9 @@ public class Randombar implements ModInitializer {
 			if(rndStart < 1)  // If rndhotbar is disabled
 				return ActionResult.PASS;
 
-			//if( KeyBinding.onKeyPressed(Key););)
-
-			//InputUtil.fromTranslationKey("key.use").getCode();
 			Random rnd = new Random();
-			int slotToSelect = rnd.nextInt(rndStart - 1, rndEnd);
+			player.getInventory().selectedSlot = rnd.nextInt(rndStart - 1, rndEnd);
 
-			while(player.getInventory().selectedSlot != slotToSelect){
-				player.getInventory().scrollInHotbar(1);
-			}
 			return ActionResult.PASS;
 		});
 	}

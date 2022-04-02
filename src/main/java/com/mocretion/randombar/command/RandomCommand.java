@@ -8,7 +8,7 @@ import net.minecraft.text.LiteralText;
 
 public class RandomCommand implements Command<FabricClientCommandSource> {
 
-    private Randombar bar;
+    private final Randombar bar;
     public RandomCommand(Randombar _bar){
         bar = _bar;
     }
