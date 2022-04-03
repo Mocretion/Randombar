@@ -12,7 +12,6 @@ Example:\
 /randombar 5 9\
 When placing a block a random slot between 5 and 9 (both inclusive) will be selected.\
 \
-To deactivate this feature you would have to type\
-/randombar 0 <(1-9)>\
-Example:\
-/randombar 0 1
+
+## Hotkeys
+Press the 'r' key to toggle the random slot selection on and off.
