@@ -11,7 +11,6 @@ The purpose for this mod is to add some detail in your builds.
 Example:\
 /randombar 5 9\
 When placing a block a random slot between 5 and 9 (both inclusive) will be selected.\
-\
 
 ## Hotkeys
 Press the 'r' key to toggle the random slot selection on and off.
