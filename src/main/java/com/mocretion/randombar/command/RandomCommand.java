@@ -20,12 +20,17 @@ public class RandomCommand implements Command<FabricClientCommandSource> {
             return -1;
         }
 
-        bar.rndStart = context.getArgument("StartSlot", Integer.class);
-        bar.rndEnd = context.getArgument("EndSlot", Integer.class);
-        if(bar.rndStart > 0)
-            context.getSource().sendFeedback(new LiteralText("Randombar enabled."));
-        else
-            context.getSource().sendFeedback(new LiteralText("Randombar disabled."));
+        final int start = context.getArgument("StartSlot", Integer.class);
+        final int end = context.getArgument("EndSlot", Integer.class);
+        bar.changeRndSlots(start, end);
+
+        if(bar.rndIsEnabled()){
+            context.getSource().sendFeedback(new LiteralText("Slots changed to " + start + " - " + end + "."));
+        }else{
+            bar.enableRnd(true);
+            context.getSource().sendFeedback(new LiteralText("Randombar enabled. Selected Slots: " +
+                    start + " - " + end));
+        }
         return 1;
     }
 }
