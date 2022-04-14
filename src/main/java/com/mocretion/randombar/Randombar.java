@@ -24,7 +24,7 @@ public class Randombar implements ModInitializer {
 	private int rndStart = 7;
 	private int rndEnd = 9;
 
-	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+	public static final Logger LOGGER = LoggerFactory.getLogger("randombar");
 
 	@Override
 	public void onInitialize() {
@@ -66,6 +66,7 @@ public class Randombar implements ModInitializer {
 				return ActionResult.PASS;
 
 			Random rnd = new Random();
+			player.getInventory().scrollInHotbar(2);
 			player.getInventory().selectedSlot = rnd.nextInt(rndStart - 1, rndEnd);
 
 			return ActionResult.PASS;
