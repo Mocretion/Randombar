@@ -3,19 +3,19 @@ package com.mocretion.randombar;
 import com.mocretion.randombar.command.RandomCommand;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.random.Random;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Random;
 
 public class Randombar implements ModInitializer {
 
@@ -30,11 +30,13 @@ public class Randombar implements ModInitializer {
 	public void onInitialize() {
 		rndEnabled = false;
 
-		ClientCommandManager.DISPATCHER.register(
-				ClientCommandManager.literal("randombar")
-						.then(ClientCommandManager.argument("StartSlot", IntegerArgumentType.integer(1, 9))
-								.then(ClientCommandManager.argument("EndSlot", IntegerArgumentType.integer(1, 9))
-										.executes(new RandomCommand(this)))));
+		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+					dispatcher.register(
+						ClientCommandManager.literal("randombar")
+								.then(ClientCommandManager.argument("StartSlot", IntegerArgumentType.integer(1, 9))
+										.then(ClientCommandManager.argument("EndSlot", IntegerArgumentType.integer(1, 9))
+												.executes(new RandomCommand(this)))));
+				});
 
 		// Register hotkey
 		toggleRndKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -52,10 +54,10 @@ public class Randombar implements ModInitializer {
 			while (toggleRndKey.wasPressed()) {
 				rndEnabled = !rndEnabled;
 				if(rndEnabled)
-					client.player.sendMessage(new LiteralText("Randombar enabled. Selected Slots: " +
+					client.player.sendMessage(Text.of("Randombar enabled. Selected Slots: " +
 							rndStart + " - " + rndEnd), false);
 				else
-					client.player.sendMessage(new LiteralText("Randombar disabled."), false);
+					client.player.sendMessage(Text.of("Randombar disabled."), false);
 			}
 		});
 
@@ -65,9 +67,9 @@ public class Randombar implements ModInitializer {
 			if(!rndEnabled)  // If rndhotbar is disabled
 				return ActionResult.PASS;
 
-			Random rnd = new Random();
+			Random rnd = Random.create();
 			player.getInventory().scrollInHotbar(2);
-			player.getInventory().selectedSlot = rnd.nextInt(rndStart - 1, rndEnd);
+			player.getInventory().selectedSlot = rnd.nextBetween(rndStart - 1, rndEnd - 1);
 
 			return ActionResult.PASS;
 		});

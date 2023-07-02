@@ -3,8 +3,8 @@ package com.mocretion.randombar.command;
 import com.mocretion.randombar.Randombar;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
-import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
-import net.minecraft.text.LiteralText;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.minecraft.text.Text;
 
 public class RandomCommand implements Command<FabricClientCommandSource> {
 
@@ -16,7 +16,7 @@ public class RandomCommand implements Command<FabricClientCommandSource> {
     @Override
     public int run(CommandContext<FabricClientCommandSource> context) {
         if(context.getArgument("StartSlot", Integer.class) >= context.getArgument("EndSlot", Integer.class)) {
-            context.getSource().sendError(new LiteralText("The second argument must be bigger than the first one!"));
+            context.getSource().sendError(Text.of("The second argument must be bigger than the first one!"));
             return -1;
         }
 
@@ -25,10 +25,10 @@ public class RandomCommand implements Command<FabricClientCommandSource> {
         bar.changeRndSlots(start, end);
 
         if(bar.rndIsEnabled()){
-            context.getSource().sendFeedback(new LiteralText("Slots changed to " + start + " - " + end + "."));
+            context.getSource().sendFeedback(Text.of("Slots changed to " + start + " - " + end + "."));
         }else{
             bar.enableRnd(true);
-            context.getSource().sendFeedback(new LiteralText("Randombar enabled. Selected Slots: " +
+            context.getSource().sendFeedback(Text.of("Randombar enabled. Selected Slots: " +
                     start + " - " + end));
         }
         return 1;
